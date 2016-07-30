@@ -16,4 +16,8 @@
     <string name="onboarding_photo_detail">Add ALL animals to your encyclopedia to be the ultimate human!</string>
 
     <string name="title_map">Map</string>
+    <string name="title_encyclopedia">Encyclopedia</string>
+    <string name="title_store">Store</string>
+    <string name="user_name">Sarah Bridges</string>
+    <string name="logout">Logout</string>
 </resources>

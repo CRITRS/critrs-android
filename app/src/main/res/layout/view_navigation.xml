@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/nav_header_height">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:paddingBottom="@dimen/nav_header_vertical_spacing"
+            android:drawableTop="@drawable/ic_user"
+            android:drawablePadding="@dimen/nav_header_vertical_spacing"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center"
+            android:text="@string/user_name"
+            android:textColor="@color/text"
+            android:textSize="20sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+    </FrameLayout>
+    <View style="@style/Divider"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                style="@style/NavigationItem"
+                android:id="@+id/btn_nav_map"
+                android:drawableStart="@drawable/ic_map"
+                android:text="@string/title_map"/>
+            <TextView
+                style="@style/NavigationItem"
+                android:id="@+id/btn_nav_encyclopedia"
+                android:drawableStart="@drawable/ic_book"
+                android:text="@string/title_encyclopedia"/>
+            <TextView
+                style="@style/NavigationItem"
+                android:id="@+id/btn_nav_store"
+                android:drawableStart="@drawable/ic_store"
+                android:text="@string/title_store"/>
+        </LinearLayout>
+    </ScrollView>
+    <View style="@style/Divider"/>
+    <TextView
+        style="@style/NavigationItem"
+        android:id="@+id/btn_nav_logout"
+        android:drawableStart="@drawable/ic_logout"
+        android:text="@string/logout"/>
+</LinearLayout>

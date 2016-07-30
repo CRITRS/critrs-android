@@ -2,19 +2,20 @@ package org.govhack.critrs
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.view_navigation.*
 import org.govhack.critrs.onboarding.OnboardingActivity
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
+        arrayOf(btn_nav_map, btn_nav_encyclopedia, btn_nav_store, btn_nav_logout).forEach {
+            it.setOnClickListener { onNavigationItemSelected(it) }
+        }
 
         if (!OnboardingActivity.isOnboardingComplete(this)) {
             startActivity(Intent(this, OnboardingActivity::class.java))
@@ -69,27 +72,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return super.onOptionsItemSelected(item)
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    fun onNavigationItemSelected(item: View): Boolean {
         // Handle navigation view item clicks here.
-        val id = item.itemId
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        when (item.id) {
+            R.id.btn_nav_map -> switchFragment(MapFragment::class.java)
+            R.id.btn_nav_encyclopedia -> switchFragment(Fragment::class.java)
+            R.id.btn_nav_store -> switchFragment(Fragment::class.java)
+            R.id.btn_nav_logout -> finish()
         }
-
-        val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
-        drawer.closeDrawer(GravityCompat.START)
+        drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun <T: Fragment> switchFragment(fragmentClass: Class<T>) {
+        // TODO
+//        Fragment.instantiate(this, fragmentClass.name)
     }
 }

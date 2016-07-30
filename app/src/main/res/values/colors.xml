@@ -6,4 +6,6 @@
     <color name="secondary">#D9385D</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="divider">#E9E9E9</color>
+    <color name="text">#414141</color>
 </resources>
