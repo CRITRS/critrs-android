@@ -14,7 +14,7 @@ class WelcomeFragment: OnboardingInfoFragment(
     }
 
     override fun onNextClicked(): Boolean {
-        activity.pushFragment(MapsFragment(), false)
+        activity.pushFragment(MapsPermissionFragment(), false)
         return true
     }
 }

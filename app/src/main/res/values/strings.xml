@@ -14,4 +14,6 @@
     <string name="onboarding_maps_detail">Take photos of all animals that appear in your area.</string>
     <string name="onboarding_photo_title">Capture as you go.</string>
     <string name="onboarding_photo_detail">Add ALL animals to your encyclopedia to be the ultimate human!</string>
+
+    <string name="title_map">Map</string>
 </resources>

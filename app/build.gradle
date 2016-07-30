@@ -12,8 +12,13 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "MAPBOX_TOKEN", "\"pk.eyJ1IjoibWVuc2x5IiwiYSI6ImNpcjhtaWFlZjAweXNnOG5rZXJhbWF3OTAifQ.XM4_Rw66SMAeQHP5B39SyA\""
+        buildConfigField "boolean", "ALWAYS_SHOW_ONBOARD", "false"
     }
     buildTypes {
+        debug {
+//            buildConfigField "boolean", "ALWAYS_SHOW_ONBOARD", "true"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -32,6 +37,12 @@ dependencies {
     compile 'com.android.support:support-v4:24.1.0'
     compile 'com.android.support:design:24.1.0'
     compile 'com.android.support:cardview-v7:24.1.0'
+
+    compile 'com.jakewharton.timber:timber:4.1.2'
+    compile 'com.karumi:dexter:2.2.2'
+    compile ('com.mapbox.mapboxsdk:mapbox-android-sdk:4.1.1@aar'){
+        transitive=true
+    }
 }
 repositories {
     mavenCentral()
