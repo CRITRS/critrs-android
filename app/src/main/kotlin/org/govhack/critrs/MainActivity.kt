@@ -1,5 +1,6 @@
 package org.govhack.critrs
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
@@ -11,6 +12,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.govhack.critrs.onboarding.OnboardingActivity
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -27,6 +29,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        if (!OnboardingActivity.isOnboardingComplete(this)) {
+            startActivity(Intent(this, OnboardingActivity::class.java))
+            finish()
+        }
     }
 
     override fun onBackPressed() {

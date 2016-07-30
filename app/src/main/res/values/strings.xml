@@ -5,4 +5,13 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_onboarding" />
+    <string name="action_next">Next</string>
+
+    <string name="onboarding_welcome_title">Welcome, human.</string>
+    <string name="onboarding_welcome_detail">Our world is huge with lots of wildlife to discover.</string>
+    <string name="onboarding_maps_title">Map based gameplay.</string>
+    <string name="onboarding_maps_detail">Take photos of all animals that appear in your area.</string>
+    <string name="onboarding_photo_title">Capture as you go.</string>
+    <string name="onboarding_photo_detail">Add ALL animals to your encyclopedia to be the ultimate human!</string>
 </resources>
