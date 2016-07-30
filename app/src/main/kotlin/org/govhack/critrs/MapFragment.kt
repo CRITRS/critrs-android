@@ -35,6 +35,11 @@ class MapFragment: Fragment() {
         })
     }
 
+    override fun onDestroyView() {
+        mapView.onDestroy()
+        super.onDestroyView()
+    }
+
     // Add the mapView lifecycle to the activity's lifecycle methods
     override fun onResume() {
         super.onResume()
@@ -52,13 +57,8 @@ class MapFragment: Fragment() {
         mapView.onLowMemory()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mapView.onDestroy()
-    }
-
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        mapView.onSaveInstanceState(outState)
+        mapView?.onSaveInstanceState(outState)
     }
 }

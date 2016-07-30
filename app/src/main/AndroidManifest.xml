@@ -26,7 +26,8 @@
         <activity
             android:name=".onboarding.OnboardingActivity"
             android:label="@string/title_activity_onboarding"
-            android:theme="@style/AppTheme.Onboarding">
+            android:theme="@style/AppTheme.Onboarding"
+            android:screenOrientation="portrait">
         </activity>
         <service android:name="com.mapbox.mapboxsdk.telemetry.TelemetryService"/>
     </application>
