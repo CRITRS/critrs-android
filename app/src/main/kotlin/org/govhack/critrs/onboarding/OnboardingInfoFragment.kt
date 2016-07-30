@@ -1,5 +1,6 @@
 package org.govhack.critrs.onboarding
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
@@ -29,7 +30,9 @@ abstract class OnboardingInfoFragment(
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         title.setText(titleRes)
+        title.typeface = Typeface.createFromAsset(resources.assets, "fonts/Montserrat-Bold.otf")
         detail.setText(detailRes)
+        image.setImageResource(iconRes)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

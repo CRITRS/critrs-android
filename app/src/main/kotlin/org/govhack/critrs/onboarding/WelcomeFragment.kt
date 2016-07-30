@@ -7,14 +7,15 @@ import org.govhack.critrs.pushFragment
 
 class WelcomeFragment: OnboardingInfoFragment(
         R.string.onboarding_welcome_title,
-        R.string.onboarding_welcome_detail, 0) {
+        R.string.onboarding_welcome_detail,
+        R.drawable.ic_mountain) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         allowEnterTransitionOverlap = true
     }
 
     override fun onNextClicked(): Boolean {
-        activity.pushFragment(MapsPermissionFragment(), false)
+        activity.pushFragment(MapsPermissionFragment())
         return true
     }
 }

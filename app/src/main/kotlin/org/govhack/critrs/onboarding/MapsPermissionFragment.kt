@@ -8,7 +8,8 @@ import org.govhack.critrs.requestPermission
 
 class MapsPermissionFragment : OnboardingInfoFragment(
         R.string.onboarding_maps_title,
-        R.string.onboarding_maps_detail, 0) {
+        R.string.onboarding_maps_detail,
+        R.drawable.ic_owl) {
     override fun onNextClicked(): Boolean {
         requestPermission(Manifest.permission.ACCESS_FINE_LOCATION) {
             if (it) {

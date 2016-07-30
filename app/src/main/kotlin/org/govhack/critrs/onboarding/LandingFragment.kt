@@ -24,7 +24,7 @@ class LandingFragment: Fragment() {
         super.onResume()
         view?.postDelayed(object : Runnable {
             override fun run() {
-                activity?.pushFragment(WelcomeFragment())
+                activity?.pushFragment(WelcomeFragment(), false)
             }
         }, 2 * resources.getInteger(android.R.integer.config_longAnimTime).toLong())
     }
