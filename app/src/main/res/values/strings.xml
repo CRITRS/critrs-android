@@ -18,6 +18,7 @@
     <string name="title_map">Map</string>
     <string name="title_encyclopedia">Encyclopedia</string>
     <string name="title_store">Store</string>
+    <string name="title_entry">Admiral Peacock</string>
     <string name="user_name">Sarah Bridges</string>
     <string name="logout">Logout</string>
 </resources>
