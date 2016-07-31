@@ -6,9 +6,21 @@ class Animal(
         val scientific_name: String,
         val status: String,
         val category: String,
-        val media_url: String,
+        val media_url: String?,
         val image_url: String?,
-        val bio: String)
+        val bio: String) {
+    val arUrl: String
+        get() =
+            if (image_url != null && image_url.length > 0) {
+                image_url
+            }
+            else if (media_url != null && media_url.length > 0) {
+                media_url
+            }
+            else {
+                "http://mens.ly/files/koala.jpg"
+            }
+}
 
 class Landmark(
         val id: String,

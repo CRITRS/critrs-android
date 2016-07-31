@@ -178,9 +178,8 @@ class MapFragment: Fragment() {
                 .setNegativeButton(R.string.encounter_cancel, null)
                 .setPositiveButton(R.string.encounter_confirm) { dialog: DialogInterface, i: Int ->
                     catching = animal
-                    // TODO: Pass animal image url in intent data
                     startActivityForResult(Intent(context, UnityPlayerNativeActivity::class.java)
-                            .setData(Uri.parse("http://mens.ly/files/koala.jpg")), 0)
+                            .setData(Uri.parse(animal.arUrl)), 0)
                 }
                 .setOnDismissListener {
                     checkingEncounter = false
