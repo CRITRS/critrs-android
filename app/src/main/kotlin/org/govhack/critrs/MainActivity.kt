@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         else
             DrawerLayout.LOCK_MODE_UNLOCKED)
 
-        // Sync up display of icon
+        // Sync up display of ic_marker
         if (hasBackStack) {
             toggle?.setDrawerIndicatorEnabled(false)
             toggle?.syncState()

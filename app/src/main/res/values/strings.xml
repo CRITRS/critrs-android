@@ -25,4 +25,8 @@
     <string name="placeholder_encounter_toast">WILD %1$s JUMP OUT!\nGO AWAY</string>
     <string name="action_berry">Use Berry</string>
     <string name="berry">Berry thrown!</string>
+    <string name="placeholder_locationname">Melbourne, CBD</string>
+    <string name="lbl_animals">Animals</string>
+    <string name="lbl_landmarks">Landmarks</string>
+    <string name="lbl_parks">Parks</string>
 </resources>

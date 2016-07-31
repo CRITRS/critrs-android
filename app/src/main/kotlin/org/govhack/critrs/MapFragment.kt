@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.view.*
 import android.widget.Toast
+import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import kotlinx.android.synthetic.main.fragment_map.*
@@ -43,22 +44,29 @@ class MapFragment: Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
+        mapView.alpha = 0.01f
         mapView.getMapAsync(fun(map) {
-            map.minZoom = 10.0
-            map.maxZoom = 17.0
+            map.minZoom = 16.0
+            map.maxZoom = 18.0
             map.setOnMyLocationChangeListener { it?.let {
                 val location = LatLng(it.latitude, it.longitude)
                 if (initialLocationSet) {
                     map.animateCamera(CameraUpdateFactory.newLatLng(location), panTime)
                 }
                 else {
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15.0f), panTime)
+                    val target = CameraPosition.Builder()
+                        .target(location)
+                        .tilt(45.0)
+                        .zoom(map.minZoom)
+                        .build()
+                    map.animateCamera(CameraUpdateFactory.newCameraPosition(target))
+                    mapView.alpha = 1.0f
                     initialLocationSet = true
                 }
                 updateNearby(location)
             }}
             map.myLocationViewSettings.accuracyAlpha = 0
-            map.myLocationViewSettings.setForegroundDrawable(context.getDrawable(R.drawable.ic_user), null)
+            map.myLocationViewSettings.setForegroundDrawable(context.getDrawable(R.drawable.ic_marker), null)
             map.isMyLocationEnabled = true
         })
     }

@@ -12,9 +12,9 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "MAPBOX_TOKEN", "\"pk.eyJ1IjoibWVuc2x5IiwiYSI6ImNpcjhtaWFlZjAweXNnOG5rZXJhbWF3OTAifQ.XM4_Rw66SMAeQHP5B39SyA\""
+        buildConfigField "String", "MAPBOX_TOKEN", "\"pk.eyJ1IjoicGx1bWFnZSIsImEiOiJjaXI4cDNqMGgwMHlwZzJtMzc0MGRsYmZjIn0.361fs3EPjToLlvPp9Ferww\""
         buildConfigField "String", "SERVER", "\"https://peaceful-basin-51847.herokuapp.com\""
-        buildConfigField "int", "CHECK_ENCOUNTER_SECONDS", "5"
+        buildConfigField "int", "CHECK_ENCOUNTER_SECONDS", "10"
         buildConfigField "boolean", "ALWAYS_SHOW_ONBOARD", "false"
         ndk {
             abiFilters "armeabi-v7a"
@@ -22,7 +22,7 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField "int", "CHECK_ENCOUNTER_SECONDS", "1"
+//            buildConfigField "int", "CHECK_ENCOUNTER_SECONDS", "1"
 //            buildConfigField "boolean", "ALWAYS_SHOW_ONBOARD", "true"
         }
         release {
