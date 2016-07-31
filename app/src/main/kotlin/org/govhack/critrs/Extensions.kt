@@ -1,5 +1,6 @@
 package org.govhack.critrs
 
+import android.graphics.Bitmap
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import com.karumi.dexter.Dexter
@@ -39,4 +40,18 @@ val Int.seconds: Long
 
 fun Long.toNanos(): Long {
     return this * 1000000L
+}
+
+fun Bitmap.squareCropTop(): Bitmap {
+    return if (width >= height) {
+        Bitmap.createBitmap(this,
+                0, 0,
+                height, height)
+    }
+    else {
+        Bitmap.createBitmap(this,
+                0, 0,
+                width, width)
+    }
+
 }

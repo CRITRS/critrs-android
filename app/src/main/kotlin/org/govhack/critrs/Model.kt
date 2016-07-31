@@ -7,7 +7,7 @@ class Animal(
         val status: String,
         val category: String,
         val media_url: String,
-        val image_name: String,
+        val image_url: String?,
         val bio: String)
 
 class Landmark(

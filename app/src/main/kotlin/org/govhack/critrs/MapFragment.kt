@@ -24,6 +24,7 @@ class MapFragment: Fragment() {
         private val panTime = 2000
         private val nearbyThrottleInterval = 10.seconds.toNanos()
         private val checkEncounterDelay = BuildConfig.CHECK_ENCOUNTER_SECONDS.seconds
+        private val shareDialog = "share"
     }
     private var initialLocationSet: Boolean = false
     private var currentLocation: LatLng? = null
@@ -31,7 +32,8 @@ class MapFragment: Fragment() {
     private var nextUpdateNearby: Long = 0
     private var failedEncounters: Int = if (BuildConfig.DEBUG) 100 else 0
     private var checkingEncounter: Boolean = false
-    var timer: Timer? = null
+    private var catching: Animal? = null
+    private var timer: Timer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -145,7 +147,11 @@ class MapFragment: Fragment() {
 
     fun checkEncounter() {
         val location = currentLocation
-        if (checkingEncounter || location == null) { return }
+        if (checkingEncounter ||
+                location == null ||
+                fragmentManager.findFragmentByTag(shareDialog) != null) {
+            return
+        }
         Timber.d("Checking for encounter at ${location}")
         checkingEncounter = true
         api.overland(location, failedEncounters) { success: Boolean, response: Response<OverlandStatus>?, error: Throwable? ->
@@ -171,6 +177,7 @@ class MapFragment: Fragment() {
                 .setMessage(message)
                 .setNegativeButton(R.string.encounter_cancel, null)
                 .setPositiveButton(R.string.encounter_confirm) { dialog: DialogInterface, i: Int ->
+                    catching = animal
                     // TODO: Pass animal image url in intent data
                     startActivityForResult(Intent(context, UnityPlayerNativeActivity::class.java)
                             .setData(Uri.parse("http://mens.ly/files/koala.jpg")), 0)
@@ -184,11 +191,9 @@ class MapFragment: Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         data?.getStringExtra(UnityPlayerNativeActivity.EXTRA_IMAGE)?.let {
-            checkingEncounter = true
-            // TODO: Show image
-            Timber.d("Got result ${it}")
-            checkingEncounter = false
+            SharePromptFragment().setArguments(it, catching?.display_name ?: "").show(fragmentManager, shareDialog)
         }
+        catching = null
 
     }
 }

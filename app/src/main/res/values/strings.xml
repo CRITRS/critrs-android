@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">critrs</string>
+    <string name="app_name">crit.rs</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -31,4 +31,6 @@
     <string name="lbl_animals">Animals</string>
     <string name="lbl_landmarks">Landmarks</string>
     <string name="lbl_parks">Parks</string>
+    <string name="share">Share</string>
+    <string name="share_title">Caught %1$s</string>
 </resources>
