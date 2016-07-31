@@ -15,10 +15,10 @@ class Application: android.app.Application() {
                     .commit()
         }
         if (BuildConfig.DEBUG) {
-            MapboxAccountManager.start(this, BuildConfig.MAPBOX_TOKEN)
-            Dexter.initialize(this)
             Timber.plant(Timber.DebugTree())
             Timber.d("Timber logging enabled")
         }
+        MapboxAccountManager.start(this, BuildConfig.MAPBOX_TOKEN)
+        Dexter.initialize(this)
     }
 }
