@@ -12,6 +12,7 @@ import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import kotlinx.android.synthetic.main.fragment_map.*
+import kotlinx.android.synthetic.main.view_headercard.*
 import org.govhack.critrs.ar.UnityPlayerNativeActivity
 import retrofit2.Response
 import timber.log.Timber
@@ -131,8 +132,8 @@ class MapFragment: Fragment() {
         currentLocation = location
         api.nearby(location) { success: Boolean, response: Response<NearbyStatus>?, error: Throwable? ->
             if (success) response?.body()?.let {
-                // TODO: Display on UI
-                Timber.d("${it.animals.size} animals and ${it.landmarks.size} landmarks")
+                animals.text = "2 of ${it.animals.size}"
+                landmarks.text = "0 of ${it.landmarks.size}"
             }
             else {
                 Timber.d(error, "Error")
@@ -168,15 +169,26 @@ class MapFragment: Fragment() {
         AlertDialog.Builder(context)
                 .setTitle(animal.display_name)
                 .setMessage(message)
-                .setNegativeButton(android.R.string.cancel, null)
+                .setNegativeButton(R.string.encounter_cancel, null)
                 .setPositiveButton(R.string.encounter_confirm) { dialog: DialogInterface, i: Int ->
                     // TODO: Pass animal image url in intent data
-                    startActivity(Intent(context, UnityPlayerNativeActivity::class.java)
-                            .setData(Uri.parse("http://mens.ly/files/koala.jpg")))
+                    startActivityForResult(Intent(context, UnityPlayerNativeActivity::class.java)
+                            .setData(Uri.parse("http://mens.ly/files/koala.jpg")), 0)
                 }
                 .setOnDismissListener {
                     checkingEncounter = false
                 }
                 .show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        data?.getStringExtra(UnityPlayerNativeActivity.EXTRA_IMAGE)?.let {
+            checkingEncounter = true
+            // TODO: Show image
+            Timber.d("Got result ${it}")
+            checkingEncounter = false
+        }
+
     }
 }

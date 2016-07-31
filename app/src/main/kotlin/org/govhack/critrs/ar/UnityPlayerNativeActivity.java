@@ -4,7 +4,6 @@ import android.app.NativeActivity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -12,10 +11,9 @@ import android.view.Window;
 
 import com.unity3d.player.UnityPlayer;
 
-import java.io.File;
-
 public class UnityPlayerNativeActivity extends NativeActivity
 {
+	public static final String EXTRA_IMAGE = "image";
 	protected UnityPlayer mUnityPlayer; // don't change the name of this variable; referenced from native code
 
 	// Setup activity layout
@@ -87,7 +85,7 @@ public class UnityPlayerNativeActivity extends NativeActivity
 	}
 
 	public void finish(String imagePath) {
-		setResult(RESULT_OK, new Intent("image", Uri.fromFile(new File(imagePath))));
+		setResult(RESULT_OK, new Intent().putExtra(EXTRA_IMAGE, imagePath));
 		finish();
 	}
 }
