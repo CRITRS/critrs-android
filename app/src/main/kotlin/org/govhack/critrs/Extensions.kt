@@ -33,3 +33,10 @@ fun requestPermission(permission: String, callback: (Boolean) -> Unit) {
 
     }, permission)
 }
+
+val Int.seconds: Long
+    get() = this * 1000L
+
+fun Long.toNanos(): Long {
+    return this * 1000000L
+}
