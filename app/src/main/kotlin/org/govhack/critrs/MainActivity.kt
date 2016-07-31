@@ -2,13 +2,12 @@ package org.govhack.critrs
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
+import android.provider.MediaStore
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.view.Menu
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -32,7 +31,9 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        fab.setOnClickListener { view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show() }
+        fab.setOnClickListener {
+            startActivity(Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA))
+        }
 
         toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -59,12 +60,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -115,8 +110,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Only show the floating action button on the home screen
-        val fabVisibility = if (contentFragment is MapFragment) View.VISIBLE else View.GONE
-        fab.visibility = fabVisibility
+//        val fabVisibility = if (contentFragment is MapFragment) View.VISIBLE else View.GONE
+//        fab.visibility = fabVisibility
     }
 
     val contentFragment: Fragment?

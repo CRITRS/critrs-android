@@ -2,9 +2,7 @@ package org.govhack.critrs
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -26,6 +24,11 @@ class MapFragment: Fragment() {
     private var nextUpdateNearby: Long = 0
     private var failedEncounters: Int = 0
     var timer: Timer? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.fragment_map, container, false);
@@ -87,6 +90,22 @@ class MapFragment: Fragment() {
         mapView?.onSaveInstanceState(outState)
     }
     //endregion
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.map, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when(item?.itemId) {
+            R.id.action_berry -> {
+                Toast.makeText(context, R.string.berry, Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
+    }
 
     fun updateNearby(location: LatLng) {
         if (nearbyRefreshing || System.nanoTime() < nextUpdateNearby ||
