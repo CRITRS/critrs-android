@@ -56,4 +56,6 @@
         <item name="android:paddingRight">@dimen/nav_header_padding</item>
         <item name="android:drawablePadding">@dimen/nav_header_padding</item>
     </style>
+
+    <style name="UnityThemeSelector" parent="android:Theme.Material.Light.NoActionBar.Fullscreen" />
 </resources>

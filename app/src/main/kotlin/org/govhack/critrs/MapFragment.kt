@@ -1,12 +1,16 @@
 package org.govhack.critrs
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.*
 import android.widget.Toast
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import kotlinx.android.synthetic.main.fragment_map.*
+import org.govhack.critrs.ar.UnityPlayerNativeActivity
 import retrofit2.Response
 import timber.log.Timber
 import java.util.*
@@ -22,7 +26,8 @@ class MapFragment: Fragment() {
     private var currentLocation: LatLng? = null
     private var nearbyRefreshing: Boolean = false
     private var nextUpdateNearby: Long = 0
-    private var failedEncounters: Int = 0
+    private var failedEncounters: Int = if (BuildConfig.DEBUG) 100 else 0
+    private var checkingEncounter: Boolean = false
     var timer: Timer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -129,22 +134,37 @@ class MapFragment: Fragment() {
     }
 
     fun checkEncounter() {
-        Timber.d("Checking for encounter at ${currentLocation}")
-        currentLocation?.let {
-            api.overland(it, failedEncounters) { success: Boolean, response: Response<OverlandStatus>?, error: Throwable? ->
-                if (success) response?.body()?.let {
-                    if (it.encounter && it.animal != null) {
-                        // TODO: Go to encounter screen
-                        val message = getString(R.string.placeholder_encounter_toast, it.animal.display_name.toUpperCase())
-                        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-                        failedEncounters = 0
-                    }
-                    else {
-                        failedEncounters++
-                        Timber.d("Got nothing ${failedEncounters} time/s")
-                    }
+        val location = currentLocation
+        if (checkingEncounter || location == null) { return }
+        Timber.d("Checking for encounter at ${location}")
+        checkingEncounter = true
+        api.overland(location, failedEncounters) { success: Boolean, response: Response<OverlandStatus>?, error: Throwable? ->
+            if (success) response?.body()?.let {
+                if (it.encounter && it.animal != null) {
+                    failedEncounters = 0
+                    goToEncounter(it.animal)
+                }
+                else {
+                    checkingEncounter = false;
+                    failedEncounters++
+                    Timber.d("Got nothing ${failedEncounters} time/s")
                 }
             }
         }
+    }
+
+    fun goToEncounter(animal: Animal) {
+        val message = getString(R.string.placeholder_encounter_toast, animal.display_name.toUpperCase())
+        AlertDialog.Builder(context)
+                .setMessage(message)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok) { dialog: DialogInterface, i: Int ->
+                    // TODO: Pass animal image url in intent data
+                    startActivity(Intent(context, UnityPlayerNativeActivity::class.java))
+                }
+                .setOnDismissListener {
+                    checkingEncounter = false
+                }
+                .show()
     }
 }
