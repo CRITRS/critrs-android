@@ -1,14 +1,18 @@
 package org.govhack.critrs.ar;
 
 import android.app.NativeActivity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Window;
 
 import com.unity3d.player.UnityPlayer;
+
+import java.io.File;
 
 public class UnityPlayerNativeActivity extends NativeActivity
 {
@@ -77,4 +81,13 @@ public class UnityPlayerNativeActivity extends NativeActivity
 	@Override public boolean onKeyDown(int keyCode, KeyEvent event)   { return mUnityPlayer.injectEvent(event); }
 	@Override public boolean onTouchEvent(MotionEvent event)          { return mUnityPlayer.injectEvent(event); }
 	/*API12*/ public boolean onGenericMotionEvent(MotionEvent event)  { return mUnityPlayer.injectEvent(event); }
+
+	public String getUrl() {
+		return getIntent().getDataString();
+	}
+
+	public void finish(String imagePath) {
+		setResult(RESULT_OK, new Intent("image", Uri.fromFile(new File(imagePath))));
+		finish();
+	}
 }

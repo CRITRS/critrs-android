@@ -2,6 +2,7 @@ package org.govhack.critrs
 
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
@@ -160,7 +161,8 @@ class MapFragment: Fragment() {
                 .setNegativeButton(android.R.string.cancel, null)
                 .setPositiveButton(android.R.string.ok) { dialog: DialogInterface, i: Int ->
                     // TODO: Pass animal image url in intent data
-                    startActivity(Intent(context, UnityPlayerNativeActivity::class.java))
+                    startActivity(Intent(context, UnityPlayerNativeActivity::class.java)
+                            .setData(Uri.parse("http://mens.ly/files/koala.jpg")))
                 }
                 .setOnDismissListener {
                     checkingEncounter = false
