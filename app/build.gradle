@@ -23,7 +23,7 @@ android {
     buildTypes {
         debug {
 //            buildConfigField "int", "CHECK_ENCOUNTER_SECONDS", "1"
-//            buildConfigField "boolean", "ALWAYS_SHOW_ONBOARD", "true"
+            buildConfigField "boolean", "ALWAYS_SHOW_ONBOARD", "true"
         }
         release {
             minifyEnabled false
