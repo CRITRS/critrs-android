@@ -163,11 +163,13 @@ class MapFragment: Fragment() {
     }
 
     fun goToEncounter(animal: Animal) {
-        val message = getString(R.string.placeholder_encounter_toast, animal.display_name.toUpperCase())
+        val message = getString(R.string.encounter_message, animal.category)
+        animal.category
         AlertDialog.Builder(context)
+                .setTitle(animal.display_name)
                 .setMessage(message)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok) { dialog: DialogInterface, i: Int ->
+                .setPositiveButton(R.string.encounter_confirm) { dialog: DialogInterface, i: Int ->
                     // TODO: Pass animal image url in intent data
                     startActivity(Intent(context, UnityPlayerNativeActivity::class.java)
                             .setData(Uri.parse("http://mens.ly/files/koala.jpg")))

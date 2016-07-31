@@ -22,7 +22,8 @@
     <string name="user_name">Sarah Bridges</string>
     <string name="logout">Logout</string>
 
-    <string name="placeholder_encounter_toast">WILD %1$s JUMP OUT!\nGO AWAY</string>
+    <string name="encounter_message">Suddenly, a wild %1$s appeared</string>
+    <string name="encounter_confirm">Capture it!</string>
     <string name="action_berry">Use Berry</string>
     <string name="berry">Berry thrown!</string>
     <string name="placeholder_locationname">Melbourne, CBD</string>
