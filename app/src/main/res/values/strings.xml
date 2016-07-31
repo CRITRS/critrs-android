@@ -21,4 +21,6 @@
     <string name="title_entry">Admiral Peacock</string>
     <string name="user_name">Sarah Bridges</string>
     <string name="logout">Logout</string>
+
+    <string name="placeholder_encounter_toast">WILD %1$s JUMP OUT!\nGO AWAY</string>
 </resources>

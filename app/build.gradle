@@ -14,6 +14,7 @@ android {
         versionName "1.0"
         buildConfigField "String", "MAPBOX_TOKEN", "\"pk.eyJ1IjoibWVuc2x5IiwiYSI6ImNpcjhtaWFlZjAweXNnOG5rZXJhbWF3OTAifQ.XM4_Rw66SMAeQHP5B39SyA\""
         buildConfigField "String", "SERVER", "\"https://peaceful-basin-51847.herokuapp.com\""
+        buildConfigField "int", "CHECK_ENCOUNTER_SECONDS", "5"
         buildConfigField "boolean", "ALWAYS_SHOW_ONBOARD", "false"
     }
     buildTypes {
